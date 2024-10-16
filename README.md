@@ -40,23 +40,21 @@ To see similar projects with additional services, please visit https://github.co
     docker compose up -d
     docker compose exec cli composer install
     ```
+4. Launch your CLI to run composer & drush commands:
 
-4. Visit the new site @ `http://drupal-practice.docker.amazee.io`
+    ```bash
+    docker compose exec cli bash
+
+5. Install your Drupal site with Drush Site Install:
+
+    ```bash
+    drush si -y
+6. Visit the new site @ `http://drupal-practice.docker.amazee.io`
 
 * If any steps fail, you're safe to rerun from any point.
 Starting again from the beginning will just reconfirm the changes.
 
 ## Local environment setup - Lando
-Launch your CLI to run composer & drush commands:
-
-    ```bash
-    docker compose exec cli bash
-
-Install your Drupal site with Drush Site Install:
-
-    ```bash
-    drush si -y
-
 This repository is set up with a `.lando.yml` file, which allows you to use Lando instead of pygmy for your local development environment.
 
 1. [Install Lando](https://docs.lando.dev/basics/installation.html#system-requirements).
