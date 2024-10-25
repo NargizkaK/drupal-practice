@@ -8,7 +8,7 @@ x-volumes:
 x-environment:
   &default-environment
     # Route that should be used locally, if you are using pygmy, this route *must* end with .docker.amazee.io
-    LAGOON_ROUTE: &default-url http://drupal-practice.docker.amazee.io
+    LAGOON_ROUTE: &default-url http://${COMPOSE_PROJECT_NAME}.docker.amazee.io
     # Uncomment if you like to have the system behave like in production
     #LAGOON_ENVIRONMENT_TYPE: production
     # Uncomment to enable xdebug and then restart via `docker compose up -d`
@@ -31,7 +31,7 @@ services:
     build:
       context: .
       dockerfile: lagoon/cli.dockerfile
-    image: &cli-image drupal-practice-cli # this image will be reused as `CLI_IMAGE` in subsequent Docker builds
+    image: &cli-image ${COMPOSE_PROJECT_NAME}-cli # this image will be reused as `CLI_IMAGE` in subsequent Docker builds
     labels:
       # Lagoon Labels
       lagoon.type: cli-persistent
@@ -62,7 +62,6 @@ services:
     << : [*default-volumes, *default-user]
     depends_on:
       - cli # basically just tells docker compose to build the cli first
-      - mariadb
     environment:
       << : *default-environment # loads the defined environment variables from the top
       LAGOON_LOCALDEV_URL: *default-url
@@ -84,7 +83,6 @@ services:
     << : [*default-volumes, *default-user]
     depends_on:
       - cli # basically just tells docker compose to build the cli first
-      - mariadb
     environment:
       << : *default-environment # loads the defined environment variables from the top
 
