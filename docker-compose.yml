@@ -40,8 +40,6 @@ services:
       lando.type: php-cli-drupal
     << : *default-volumes # loads the defined volumes from the top
     user: root
-    depends_on:
-      - mariadb
     volumes_from: ### mount the ssh-agent from the pygmy or cachalot ssh-agent. Automatically removed in CI.
       - container:amazeeio-ssh-agent ### Local overrides to mount host SSH keys. Automatically removed in CI.
     environment:
